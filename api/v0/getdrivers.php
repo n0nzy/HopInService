@@ -38,7 +38,7 @@ while($row = $result->fetch_assoc()) {
 
   $i++;
 
-  $users[] = array('user' => $row);
+  $users[] = $row;
 
 //  print "<br />";  print("$fid, ");  print("$femailid, ");  print("$fusername, ");  print("$femail, ");  print("$factive_status");  print "<br />";
 }

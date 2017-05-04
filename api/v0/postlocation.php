@@ -13,8 +13,8 @@ function getIfSet(&$value) {
 }
 
 $latitude = getIfSet($_REQUEST['latitude']);
-$latitude = getIfSet($_REQUEST['latitude']);
-$latitude = getIfSet($_REQUEST['latitude']);
+$longitude = getIfSet($_REQUEST['longitude']);
+$emailid = getIfSet($_REQUEST['emailid']);
 
 #connect to a backend database
 $mysqli = new mysqli("localhost", "hopin_admin", "temporarypassword", "hopin");

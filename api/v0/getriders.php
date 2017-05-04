@@ -31,7 +31,7 @@ while($row = $result->fetch_assoc()) {
   $active_status = $row['active_status'];
 	$i++;
 
-  $users[] = array('user' => $row);
+  $users[] = $row;
 }
 
 header('Content-type: application/json');
