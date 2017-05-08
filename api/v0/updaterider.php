@@ -1,48 +1,48 @@
 <?php
-    
+
     function getDistanceinKm($lat1, $lat2, $lon1, $lon2){
         $R = 6371;
         $dLat = deg2rad($lat2-$lat1);
         $dLon = deg2rad($lon2-$lon1);
-        
+
         $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon/2) * sin($dLon/2);
         $c = 2 * atan2(sqrt($a), sqrt(1-$a));
         $d = $R * $c;
         return $d;
     }
-    
-    
-    $userid = $_REQUEST['userid'];
+
+
+    $userEmail = $_REQUEST['userEmail'];
     $latitude = $_REQUEST['latitude'];
     $longitude = $_REQUEST['longitude'];
-    
-    
-    
+
+
+
     $mysqli = new mysqli("localhost", "hopin_admin", "temporarypassword", "hopin");
 
     if($mysqli->connect_errno){
         print("Error connecting to the database: " . $mysqli->connect_errno ."\n");
         exit();
     }
-    
-    $query = "UPDATE users set latitude = '$latitude' , longitude = '$longitude' where id = '$userid'";
+
+    $query = "UPDATE users set curr_latitude = '$latitude' , curr_longitude = '$longitude' where email = '$userEmail'";
     $result = $mysqli->query($query);
-    
+
     if($result == TRUE)
     {
         $response["success"] = 0;
         $response["message"] = "Record updated successfully";
-        
+
     }
     else{
-        
+
         $response["success"] = -1;
         $response["message"] = "User Info update failed";
-        
+
         }
-    $query = "SELECT fullname, latitude,longitude from users where id != '$userid'";
+    $query = "SELECT fullname, curr_latitude,curr_longitude from users where email != '$userEmail'";
     $riders = $mysqli->query($query);
-    
+
     if(mysqli_num_rows($riders)>0)
     {
         $response["riders"] = array();
@@ -62,11 +62,8 @@
             }
           }
     }
-    
+
     echo json_encode($response);
-    
-    
+
     $mysqli->close();
 ?>
-
-
