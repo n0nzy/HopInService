@@ -2,6 +2,9 @@
 
 $ridername = $_REQUEST["ridername"];
 
+
+
+
 $mysqli = new mysqli("localhost", "hopin_admin", "temporarypassword", "hopin");
 
 if($mysqli->connect_errno){
@@ -11,6 +14,9 @@ if($mysqli->connect_errno){
   exit;
 }
 
+
+
+ 
 	$query = "SELECT * from users WHERE username='$ridername'";
 	$result=$mysqli->query($query);
 	//$idarray[$i] = $tb_name;
@@ -21,14 +27,16 @@ if($mysqli->connect_errno){
 	$flongitude = $row['curr_longitude'];
 	$drivername=$row['drivername'];
     $selected=$row['selected'];
-  }
+  }	
 if($selected==0)
 {
     $response["selected"]=$selected;
     echo json_encode($response);
 }
 else{
-$query = "SELECT * from users WHERE username='$drivername'";
+$query = "SELECT * from users WHERE username='$drivername'"; 
+$result=$mysqli->query($query);
+while($row = $result->fetch_assoc()) {
 $dphone=$row["phone"];
 $dfullname=$row["fullname"];
 $dspecs=$row["vehicle_name"];
@@ -37,12 +45,18 @@ $response["phone"]=$dphone;
 $response["driverfullname"]=$dfullname;
 $response["latitude"]=$flatitude;
 $response["longitude"]=$flongitude;
-$response["vehicle_name"]=$dspecs;
+$response["vehicle_name"]=
 
 
 echo json_encode($response);
 }
+}
+
+
+ 
 
 $mysqli->close();
+
+
 
 ?>
