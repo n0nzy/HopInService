@@ -25,14 +25,23 @@ if($mysqli->connect_errno){
   exit;
 }
 
-$query = "INSERT INTO users (id, email, latitude, longitude) VALUES (NULL, '$emailid', $latitude, $longitude )";
-print ($query);
+//update user's current location.
+$query = "UPDATE  users SET  curr_latitude =  $latitude, curr_longitude =  $longitude WHERE  email = '$emailid'";
+//print ($query);
+$result = $mysqli->query($query);
+if(!$result) {
+		print("Data was not updated in user's table " . $mysqli->error . "\n");
+}
+
+// Constant Updates of Information
+$query = "INSERT INTO location (id, email, latitude, longitude) VALUES (NULL, '$emailid', $latitude, $longitude )";
+//print ($query);
 $result = $mysqli->query($query);
 if(!$result) {
 		print("Data was not inserted into the table " . $mysqli->error . "\n");
 }
 
-$query = "SELECT * FROM users ORDER BY current_timee DESC LIMIT 100";
+$query = "SELECT * FROM location where email = '$emailid' ORDER BY current_timee DESC LIMIT 1";
 $result = $mysqli->query($query);
 
 $i = 0;

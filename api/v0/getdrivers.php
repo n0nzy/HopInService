@@ -11,10 +11,10 @@ if($mysqli->connect_errno){
 
 /* Grab data from database */
 //SELECT fullname, email, longitude, latitude, MAX( current_timee )
-//FROM users GROUP BY email DESC
-//$query = "SELECT id, email, username, signed_up, last_login, active_status, driver_status FROM auth WHERE driver_status = 1";
-$query = "SELECT auth.id, auth.fullname, users.email, users.latitude, users.longitude, MAX( users.current_timee ) AS curr_time , users.vehicle_name, users.specs, users.seats_num, auth.active_status, auth.driver_status
-FROM users INNER JOIN auth ON auth.email = users.email WHERE auth.driver_status =1 GROUP BY email";
+//FROM location GROUP BY email DESC
+//$query = "SELECT id, email, username, signed_up, last_login, active_status, driver_status FROM users WHERE driver_status = 1";
+$query = "SELECT users.id, users.fullname, location.email, location.latitude, location.longitude, MAX( location.current_timee ) AS curr_time , location.vehicle_name, location.specs, location.seats_num, users.active_status, users.driver_status
+FROM location INNER JOIN users ON users.email = location.email WHERE users.driver_status =1 GROUP BY email";
 
 $result = $mysqli->query($query);
 
