@@ -23,7 +23,7 @@ $row = $result->fetch_assoc();
 
 if($row){
 	$query = "UPDATE `users` SET `phone`='$phone', `street`='$street', `city`='$city', `state`='$state', `zipcode`='$zip' WHERE `username` = '$username' AND `email` = '$email'";
-  print("Data to update: " . $query . "\n");
+  //print("Data to update: " . $query . "\n");
 	$result = $mysqli->query($query);
 	print("Registration Successful\n");
 }
