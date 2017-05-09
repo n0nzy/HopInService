@@ -1,5 +1,9 @@
 <?php
 
+require_once("dbcred.php");
+#connect to a backend database
+$mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
+
 $username = $_REQUEST["username"];
 $email = $_REQUEST["email"];
 $phone = $_REQUEST["phone"];
@@ -7,8 +11,6 @@ $street = $_REQUEST["street"];
 $city = $_REQUEST["city"];
 $state = $_REQUEST["state"];
 $zip = $_REQUEST["zip"];
-
-$mysqli = new mysqli("localhost", "hopin_admin", "temporarypassword", "hopin");
 
 if($mysqli->connect_errno){
   echo "Hello World\n";

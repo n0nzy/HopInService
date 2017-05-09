@@ -1,12 +1,14 @@
 <?php
 
+require_once("dbcred.php");
+#connect to a backend database
+$mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
+
+
 $fullname = $_REQUEST["fullname"];
 $email = $_REQUEST["email"];
 $username = $_REQUEST["username"];
 $password = $_REQUEST["password"];
-
-#connect to a backend database
-$mysqli = new mysqli("localhost", "basic", "123", "hopin");
 
 if($mysqli->connect_errno){
   echo "Could not connect to the database\n";

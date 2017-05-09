@@ -1,6 +1,11 @@
 <?php
 /* Save location of currently loggedin user.  Expects POST parameters from mobile app, do not run through browser. */
 
+require_once("dbcred.php");
+#connect to a backend database
+$mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
+
+
 function getIfSet(&$value) {
   if (isset($value)) {
     return $value;
@@ -15,9 +20,6 @@ function getIfSet(&$value) {
 $latitude = getIfSet($_REQUEST['latitude']);
 $longitude = getIfSet($_REQUEST['longitude']);
 $emailid = getIfSet($_REQUEST['emailid']);
-
-#connect to a backend database
-$mysqli = new mysqli("localhost", "hopin_admin", "temporarypassword", "hopin");
 
 if($mysqli->connect_errno){
   echo "Could not connect to the database\n";

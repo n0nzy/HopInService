@@ -1,8 +1,10 @@
 <?php
 
-$ridername = $_REQUEST["ridername"];
+require_once("dbcred.php");
+#connect to a backend database
+$mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
 
-$mysqli = new mysqli("localhost", "hopin_admin", "temporarypassword", "hopin");
+$ridername = $_REQUEST["ridername"];
 
 if($mysqli->connect_errno){
 

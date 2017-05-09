@@ -1,5 +1,10 @@
 <?php
 
+require_once("dbcred.php");
+#connect to a backend database
+$mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
+
+
     function getDistanceinKm($lat1, $lat2, $lon1, $lon2){
         $R = 6371;
         $dLat = deg2rad($lat2-$lat1);
@@ -16,9 +21,6 @@
     $latitude = $_REQUEST['latitude'];
     $longitude = $_REQUEST['longitude'];
 
-
-
-    $mysqli = new mysqli("localhost", "hopin_admin", "temporarypassword", "hopin");
 
     if($mysqli->connect_errno){
         print("Error connecting to the database: " . $mysqli->connect_errno ."\n");

@@ -1,7 +1,8 @@
 <?php
 
+require_once("dbcred.php");
 #connect to a backend database
-$mysqli = new mysqli("localhost", "hopin_admin", "temporarypassword", "hopin");
+$mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
 
 if($mysqli->connect_errno){
   echo "Could not connect to the database\n";

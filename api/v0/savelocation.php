@@ -1,18 +1,14 @@
 <?php
 /* Save location of currently logged in user, this is a debug version of postlocation.php */
 
-//$latitude = $_REQUEST["latitude"];
-//$longitude = $_REQUEST["longitude"];
-//$emailid = $_REQUEST["emailid"];
-
+require_once("dbcred.php");
+#connect to a backend database
+$mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
 
 $latitude = 99.5;
 $longitude = 190.3;
 //$current_timee = "2017-11-4 08:28:30";
 $emailid = "debug@example.com";
-
-#connect to a backend database
-$mysqli = new mysqli("localhost", "hopin_admin", "temporarypassword", "hopin");
 
 if($mysqli->connect_errno){
   echo "Could not connect to the database\n";

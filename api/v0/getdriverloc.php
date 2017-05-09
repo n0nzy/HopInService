@@ -1,11 +1,10 @@
 <?php
 
+require_once("dbcred.php");
+#connect to a backend database
+$mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
+
 $drivername = $_REQUEST["ridername"];
-
-
-
-
-$mysqli = new mysqli("localhost", "hopin_admin", "temporarypassword", "hopin");
 
 if($mysqli->connect_errno){
 
@@ -15,8 +14,6 @@ if($mysqli->connect_errno){
 }
 
 
-
- 
 	$query = "SELECT * from users WHERE username='$drivername'";
 	$result=$mysqli->query($query);
 	//$idarray[$i] = $tb_name;
@@ -27,12 +24,12 @@ if($mysqli->connect_errno){
 	$flongitude = $row['curr_longitude'];
     $response["latitude"]=$flatitude;
     $response["longitude"]=$flongitude;
-  }	
+  }
 echo json_encode($response);
 
 
 
- 
+
 
 $mysqli->close();
 
