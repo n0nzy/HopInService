@@ -1,10 +1,16 @@
-<?php
 
 require_once("dbcred.php");
+
+
+$drivername = $_REQUEST["ridername"];
+
+
+
+
+
 #connect to a backend database
 $mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
 
-$drivername = $_REQUEST["ridername"];
 
 if($mysqli->connect_errno){
 
@@ -13,26 +19,20 @@ if($mysqli->connect_errno){
   exit;
 }
 
-
-	$query = "SELECT * from users WHERE username='$drivername'";
+	$query = "SELECT * from users WHERE fullname='$drivername'";
+	//echo $query;
 	$result=$mysqli->query($query);
 	//$idarray[$i] = $tb_name;
-
-	while($row = $result->fetch_assoc()) {
+	$row=$result->fetch_assoc();
 	//$rideradd= $row['address'];
-	$flatitude = $row['curr_latitude'];
-	$flongitude = $row['curr_longitude'];
-    $response["latitude"]=$flatitude;
-    $response["longitude"]=$flongitude;
-  }
+	$flatitude=$row['curr_latitude'];
+	$flongitude=$row['curr_longitude'];
+  $response["latitude"]=$flatitude;
+  $response["longitude"]=$flongitude;
+
 echo json_encode($response);
 
-
-
-
-
 $mysqli->close();
-
 
 
 ?>

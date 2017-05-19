@@ -42,7 +42,8 @@ $mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
         $response["message"] = "User Info update failed";
 
         }
-    $query = "SELECT fullname, curr_latitude,curr_longitude from users where email != '$userEmail'";
+
+    $query = "SELECT fullname, curr_latitude, curr_longitude, email FROM users WHERE driver_status != 1 AND email != '$userEmail'";
     $riders = $mysqli->query($query);
 
     if(mysqli_num_rows($riders)>0)
@@ -57,6 +58,7 @@ $mysqli = new mysqli(SERVER, DBUSER, DBPASS, DB);
               $latlongArray ["name"] = $row[0];
               $latlongArray ["latitude"] = $row[1];
               $latlongArray ["longitude"] = $row[2];
+              $latlongArray ["email"] = $row[3];
               $latlongArray ["distance"] = $distance;
 
                array_push($response["riders"],$latlongArray);
